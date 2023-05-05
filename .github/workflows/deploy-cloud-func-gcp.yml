@@ -15,14 +15,16 @@ env:
 
 
 jobs:
-  prep:
+  prepare:      
+    name: Setup GCP & prep for deploy 
+    uses: ./.github/workflows/prep-project.yml
+
+  deploy:
     runs-on: ubuntu-latest
+    needs: prepare
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Setup GCP & prep for deploy 
-        uses: prep:./.github/workflows/prep-project.yml
         with:
           gcp_proj: ${{ env.GCP_PROJ }}
           secrets: inherit
