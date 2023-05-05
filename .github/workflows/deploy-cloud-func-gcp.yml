@@ -21,6 +21,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.GCP_PROJ }}
+           service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
 
       - name: Authenticate with Google Cloud Platform
         uses: google-github-actions/auth@v1
@@ -37,7 +38,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -46,7 +47,7 @@ jobs:
 
       - name: Deploy function
         run: |
-          gcloud functions deploy $FUNC_NAME --entry-point main --runtime python39 --source . --trigger-http
+          gcloud functions deploy $FUNC_NAME --entry-point main --runtime python39 --source . --trigger-http --region europe-west2
 
       - name: Test function
         run: |
