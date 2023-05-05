@@ -17,6 +17,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Set up GCP CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
@@ -27,14 +30,12 @@ jobs:
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ env.SERVICE_ACCOUNT_KEY }}
+
       - name: Use gcloud
         run: |
           gcloud auth list
           gcloud config list
           
-      - name: Checkout code
-        uses: actions/checkout@v2
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
