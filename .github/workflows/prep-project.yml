@@ -1,0 +1,43 @@
+name: Setup GCP & prep for deploy 
+
+on:
+  workflow_call:
+    inputs:
+      gcp_proj:
+        required: true
+        type: string
+    secrets:
+      gcp_sa_key:
+        required: true
+
+jobs:
+  setup:
+    name: Setup GCP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up GCP CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ inputs.gcp_proj }}
+
+      - name: Authenticate with Google Cloud Platform
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.gcp_sa_key }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+  prep:
+      name: Prep for deploy 
+      needs: setup
+      runs-on: ubuntu-latest
+      steps:
+        - name: Install dependencies
+          run: |
+            pip install --upgrade pip
+            pip install -r requirements.txt

@@ -13,38 +13,16 @@ env:
   ACTIONS_STEP_DEBUG: true
   RUNNER_DEBUG: true
 
+
 jobs:
-  deploy:
+  prep:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up GCP CLI
-        uses: google-github-actions/setup-gcloud@v1
+      - name: Setup GCP & prep for deploy 
+        uses: ./.github/workflows/prep-project.yml
         with:
-          project_id: ${{ env.GCP_PROJ }}
-          service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
-
-      - name: Authenticate with Google Cloud Platform
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ env.SERVICE_ACCOUNT_KEY }}
-
-      - name: Use gcloud
-        run: |
-          gcloud auth list
-          gcloud config list
-          
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
+          gcp_proj: ${{ env.GCP_PROJ }}
+          gcp_sa_key: ${{ secrets.GCP_SA_SECRET }}
 
       - name: Deploy function
         run: |
