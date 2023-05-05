@@ -7,15 +7,16 @@ on:
 
 env:
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_SECRET }}
+  FUNC_NAME: ${{ var.FUNC_NAME }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Set up GCP CLI
-        uses: google-github-actions/setup-gcloud@main
+        uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: my-gcp-project
+          project_id: ${{ var.GCP_PROJ }}
           service_account_key: ${{ secrets.GCP_SA_SECRET }}
           export_default_credentials: true
 
@@ -34,7 +35,7 @@ jobs:
 
       - name: Deploy function
         run: |
-          gcloud functions deploy ${{ env.FUNC_NAME }} --entry-point main --runtime python39 --source . --trigger-http
+          gcloud functions deploy $FUNC_NAME--entry-point main --runtime python39 --source . --trigger-http
 
       - name: Test function
         run: |
