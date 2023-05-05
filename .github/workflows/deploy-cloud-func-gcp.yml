@@ -22,8 +22,8 @@ jobs:
         uses: ./.github/workflows/prep-project.yml
         with:
           gcp_proj: ${{ env.GCP_PROJ }}
-          gcp_sa_key: ${{ secrets.GCP_SA_SECRET }}
-
+        secrets: inherit
+        
       - name: Deploy function
         run: |
           gcloud functions deploy $FUNC_NAME --entry-point main --runtime python39 --source . --trigger-http --region europe-west2

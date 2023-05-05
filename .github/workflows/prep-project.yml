@@ -6,13 +6,11 @@ on:
       gcp_proj:
         required: true
         type: string
-    secrets:
-      gcp_sa_key:
-        required: true
+        
 env:
   ACTIONS_STEP_DEBUG: true
   RUNNER_DEBUG: true
-  
+
 jobs:
   setup:
     name: Setup GCP
@@ -29,7 +27,7 @@ jobs:
       - name: Authenticate with Google Cloud Platform
         uses: google-github-actions/auth@v1
         with:
-          credentials_json: ${{ secrets.gcp_sa_key }}
+          credentials_json: ${{ secrets.GCP_SA_SECRET }}
 
       - name: Set up Python
         uses: actions/setup-python@v2
