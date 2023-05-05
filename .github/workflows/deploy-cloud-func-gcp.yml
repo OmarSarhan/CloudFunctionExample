@@ -7,7 +7,7 @@ on:
 
 env:
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_SECRET }}
-  FUNC_NAME: ${{ var.FUNC_NAME }}
+  FUNC_NAME: ${{ env.FUNC_NAME }}
   ACTIONS_STEP_DEBUG: true
   RUNNER_DEBUG: true
 
@@ -18,7 +18,7 @@ jobs:
       - name: Set up GCP CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: ${{ var.GCP_PROJ }}
+          project_id: ${{ env.GCP_PROJ }}
           service_account_key: ${{ secrets.GCP_SA_SECRET }}
           export_default_credentials: true
 
