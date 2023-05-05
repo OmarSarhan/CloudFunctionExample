@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  FUNCTION_NAME: ${{ env.FUNC_NAME}}
+  FUNCTION_NAME: ${{ env.FUNC_NAME }}
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_SECRET }}
 
 jobs:
