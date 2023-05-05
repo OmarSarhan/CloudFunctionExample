@@ -9,7 +9,10 @@ on:
     secrets:
       gcp_sa_key:
         required: true
-
+env:
+  ACTIONS_STEP_DEBUG: true
+  RUNNER_DEBUG: true
+  
 jobs:
   setup:
     name: Setup GCP
