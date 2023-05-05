@@ -25,7 +25,7 @@ jobs:
       - name: Authenticate with Google Cloud Platform
         uses: google-github-actions/auth@v1
         with:
-          credentials: ${{ env.SERVICE_ACCOUNT_KEY }}
+          credentials_json: ${{ env.SERVICE_ACCOUNT_KEY }}
       - name: Use gcloud
         run: |
           gcloud auth list
