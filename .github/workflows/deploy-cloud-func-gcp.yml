@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  FUNCTION_NAME: ${{ env.FUNC_NAME }}
   SERVICE_ACCOUNT_KEY: ${{ secrets.GCP_SA_SECRET }}
 
 jobs:
@@ -35,7 +34,7 @@ jobs:
 
       - name: Deploy function
         run: |
-          gcloud functions deploy $FUNCTION_NAME --entry-point main --runtime python39 --source . --trigger-http
+          gcloud functions deploy ${{ env.FUNC_NAME }} --entry-point main --runtime python39 --source . --trigger-http
 
       - name: Test function
         run: |
