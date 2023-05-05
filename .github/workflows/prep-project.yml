@@ -6,7 +6,6 @@ on:
       gcp_proj:
         required: true
         type: string
-        
 env:
   ACTIONS_STEP_DEBUG: true
   RUNNER_DEBUG: true
@@ -16,9 +15,6 @@ jobs:
     name: Setup GCP
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Set up GCP CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
