@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/prep-project.yml
     with:
       gcp_proj: $GCP_PROJ
-      secrets: inherit
+    secrets: inherit
 
   deploy:
     name: Deploy live
