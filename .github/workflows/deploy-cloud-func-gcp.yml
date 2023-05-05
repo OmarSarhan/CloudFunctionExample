@@ -20,14 +20,12 @@ jobs:
       - name: Set up GCP CLI
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: $GCP_PROJ
-          service_account_key: $SERVICE_ACCOUNT_KEY
-          export_default_credentials: true
+          project_id: ${{ env.GCP_PROJ }}
 
       - name: Authenticate with Google Cloud Platform
         uses: google-github-actions/auth@v1
         with:
-          credentials: $SERVICE_ACCOUNT_KEY
+          credentials: ${{ env.SERVICE_ACCOUNT_KEY }}
       - name: Use gcloud
         run: |
           gcloud auth list
