@@ -21,7 +21,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.GCP_PROJ }}
-           service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
+          service_account_key: ${{ env.SERVICE_ACCOUNT_KEY }}
 
       - name: Authenticate with Google Cloud Platform
         uses: google-github-actions/auth@v1
