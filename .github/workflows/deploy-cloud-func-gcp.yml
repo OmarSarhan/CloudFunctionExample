@@ -19,7 +19,7 @@ jobs:
     name: Setup GCP & prep for deploy 
     uses: ./.github/workflows/prep-project.yml
     with:
-      gcp_proj: ${{ env.GCP_PROJ }}
+      gcp_proj: $GCP_PROJ
       secrets: inherit
 
   deploy:
